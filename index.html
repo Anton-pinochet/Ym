@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .conteyner_form {
+            position: relative;
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: 300px;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+    }
+
+    .close-button {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 50px;
+            cursor: pointer;
+            color: #ffffff;
+    }
+
+    .content.hide {
+      opacity: 0;
+    }
+        .vertical_alt {
+            opacity: 0;
+            height: 0;
+            width: 0px;
+            display: none;
+        }
+
+        .vertical {
+            transition: opacity 1.5s ease-in-out, visible 1.5s ease-in-out;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            padding-top: 9%;
+            margin-left: 50%;
+            transform: translate(-50%);
+            margin-top: 1%;
+        }
+
+        .vertical_alt.show {
+            opacity: 1;
+            visibility: visible;
+            display: inline-grid;
+            height: auto;
+            width: 80%;
+            position: relative;
+            align-items: center;
+            justify-items: center;
+            justify-content: center;
+            left: 50%;
+            top: 50%;
+            transform: translate(-43%, -50%);
+            z-index: 10;
+        }
+
+        .img_1 > div {
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: opacity 1.5s ease-in-out, height 1.5s ease-in-out;
+            pointer-events: none;
+        }
+
+        .img_3 > div {
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: opacity 1.5s ease-in-out, height 1.5s ease-in-out;
+            pointer-events: none;
+        }
+
+        /* Активный блок виден */
+        .img_3 > div.active {
+            display: inline-grid;
+            justify-content: center;
+            align-items: center;
+            justify-items: center;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            height: auto;
+            overflow: visible;
+            position: absolute;
+            top: 50%;
+            left: 72%;
+            transform: translate(-5%, -50%);
+           
+        }
+
+        .img_1 > div.active {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            height: auto;
+            overflow: visible;
+            position: relative;
+            position: absolute;
+            top: 50%;
+            left: 22%;
+            transform: translate(-70%, -50%);
+            text-align: center;
+        }
+
+        @font-face {
+            font-family: 'Source_S_4_V';
+            src: url('/ym/fons/transfonter.org-20250714-044935/SourceSerif448pt-Regular.woff2') format('woff2'),
+            url('/ym/fons/transfonter.org-20250714-044935/SourceSerif448pt-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: light;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'S_4_V';
+            src: url('/ym/fons/transfonter.org-20250714-044935/SourceSerif4-ExtraLight.woff') format('woff');
+            src: url('/ym/fons/transfonter.org-20250714-044935/SourceSerif4-ExtraLight.woff2') format('woff2');
+            font-weight: 100;
+            font-style: light;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Hello_January_script';
+            src: url(/ym/fons/Hello_January_script/Hello_January_script_cyrillic_Script.woff) format('woff');
+        }
+
+        .menu {
+            font-family: Source_S_4_V;
+            font-size: 1.7vh;
+            color: #ffffff;
+            padding-right: 8%;
+            padding-left: 8%;
+            padding-top: 1%;
+            width: 100%;
+            height: 100px;
+        }
+
+        .menu-item {
+            transition: font-size 0.5s ease;
+            font-size: 1.7vh;
+            cursor: pointer;
+        }
+
+        .menu-item.active {
+            font-size: 2.3vh;
+        }
+
+        .bacgraund {
+            position: relative;
+            background-color: #807d7d;
+            width: 100vw;
+            height: 100vh;
+            z-index: 2;
+        }
+
+        .conteyner {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 50%;
+            transform: translateY(-55%);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .center_top {
+            position: absolute;
+            left: 50%;
+            top: 10%;
+            transform: translate(-50%, 20%);
+            z-index: -1;
+        }
+
+        .item_c {
+            position: relative;
+            margin-top: -15%;
+        }
+
+        .item_left {
+            position: relative;
+            margin-right: -2%;
+        }
+
+        .item {
+            position: relative;
+        }
+
+        .conteyner_bloc {
+            position: relative;
+        }
+
+        .boc_txt {
+            position: relative;
+            display: flex;
+            white-space: pre-line;
+            font-family: Source_S_4_V;
+            font-size: 1.2vw;
+            color: #ffffff;
+            grid-area: 1 / 1;
+            z-index: 1;
+            margin-bottom: 5%;
+        }
+
+        .boc_txt_2 {
+            position: relative;
+            display: flex;
+            white-space: pre-line;
+            font-family: Hello_January_script;
+            font-size: 11vh;
+            color: #ffffff;
+            grid-area: 1 / 1;
+            z-index: 1;
+        }
+
+        .text {
+            position: relative;
+            display: flex;
+            white-space: pre-line;
+            font-family: Source_S_4_V;
+            font-size: 1.8vh;
+            color: #ffffff;
+        }
+
+        .text_ofer {
+            position: relative;
+            font-family: S_4_V;
+            font-size: 5.2vh;
+            color: #ffffff;
+        }
+        .text_ofer_2 {
+            white-space: pre-line;
+            position: relative;
+            font-family: S_4_V;
+            font-size: 6vh;
+            color: #ffffff;
+            
+        }
+         .text_ofer_3 {
+            white-space: pre-line;
+            position: relative;
+            font-family: S_4_V;
+            font-size: 3vh;
+            color: #ffffff;
+            
+        }
+
+        .text_ofer_form {
+            position: relative;
+            display: flex;
+            white-space: pre-line;
+            font-family: Source_S_4_V;
+            font-size: 2vh;
+            color: #ffffff;
+            grid-area: 1 / 1;
+            padding: 5%;
+        }
+
+        
+
+        .text_ofer_name {
+            position: relative;
+            display: flex;
+            white-space: pre-line;
+            font-family: S_4_V;
+            font-size: 1.3vh;
+            color: #ffffff;
+            grid-area: 1 / 1;
+            z-index: 1;
+        }
+
+        .img_ramcka_2 {
+            display: block;
+            grid-area: 1 / 1;
+            width: 100%;
+            height: auto;
+        }
+
+        .img_ramcka {
+            display: block;
+            grid-area: 1 / 1;
+            width: 100%;
+            height: auto;
+            padding: 10px;
+            margin: 3vh;
+        }
+
+        img {
+            position: relative;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .img_3_1  active {
+            position: relative;
+            display: inline-grid;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .img_1_1 active {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .center {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .img_3_6 {
+            position: absolute;
+            left: -50%;
+        }
+        .animated-button {
+            background-color: #918d8d;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: Source_S_4_V;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 300px;
+            height: 50;
+            border: 1px solid #ffffff ;
+        }
+
+       .animated-button:hover {
+            background-color:  #ada9a9;
+            transform: scale(1.05);
+            color: #ffffff;
+        }
+        
+        input[type='text'],
+        input[type='email'],
+        input[type=tel]{
+            font-family: Source_S_4_V;
+            font-size: 26px;
+            color: #ffffff;
+            height: 30px;
+            width: 400px;
+            background-color: #807d7d;
+            border: 1px solid #ffffff;
+            padding: 2px;
+        }
+        input::placeholder{
+            font-family: S_4_V;
+            font-size: 2.5vh;
+            color: #4e4c4c;
+
+        }
+        textarea{
+            width: 400px;
+            height: 300px;
+            background-color: #807d7d;
+            border: 1px solid #ffffff;
+            font-family: Source_S_4_V;
+            font-size: 26px;
+            color: #ffffff;
+            
+        }
+        label{
+            font-family: S_4_V;
+            font-size: 2vh;
+            color: #ffffff;
+        }
+        .conteyner_form{
+            opacity: 0;
+            background-color: #807d7d;
+            border: 1px solid #ffffff;
+            position: absolute;
+            width: 95vw;
+            height: 90vh;
+             pointer-events: none; /* чтобы не мешала при скрытии */
+             transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 100;
+           
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .conteyner_form.show {
+            opacity: 1;
+            pointer-events: auto;
+            }
+
+
+
+            .boc_txt {
+            position: relative;
+            display: flex;
+            white-space: pre-line;
+            font-family: Source_S_4_V;
+            font-size: 1.2vw;
+            color: #ffffff;
+            grid-area: 1 / 1;
+            z-index: 1;
+            margin-bottom: 5%;
+        }
+        form{
+         
+           
+            
+
+           
+        }
+        input[type=submit]{
+            background-color: #ffffff;
+            color: #333;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-family: Source_S_4_V;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 300px;
+            height: 50;
+
+        }
+        input[type=submit]:hover{
+            background-color: #00ad42;
+            transform: scale(1.05);
+            color: #ffffff;
+        }
+        
+        
+
+        .video-thumbs-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            position: relative;      
+            grid-area: 1 / 1;
+            z-index: 10;
+        }
+        .video-thumb-wrapper {
+            
+            text-align: center;
+            cursor: pointer;
+            flex-basis: 280px;
+        }
+        .video-thumb {
+            width: 100%;
+            height: 160px;
+            background: #000;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .video-thumb:hover {
+            transform: scale(1.05);
+        }
+        .video-thumb-title {
+            position: relative;
+            display: flex;
+            color: white;
+            font-family: Source_S_4_V;
+            font-size: 1.8vh;
+            margin: 8px 0;
+        }
+        .video-caption-popup {
+            color: #ffffff;
+            font-family: Source_S_4_V;
+            font-size: 2vh;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="bacgraund">
+        <table class="menu">
+            <tr>
+                <td class="menu-item active">ГЛАВНАЯ</td>
+                <td class="menu-item ">ПОЧЕМУ ВАЖНО РАБОТАТЬ С ПСИХОЛОГИЕЙ ДЕНЕГ</td>
+                <td class="menu-item">ЧТО ВЫ ПОЛУЧИТЕ</td>
+                <td class="menu-item">ФОРМАТ РАБОТЫ</td>
+                <td class="menu-item">ОТЗЫВЫ</td>
+                <td class="menu-item">БОНУСЫ</td>
+                <td class="menu-item">ОБО МНЕ</td>
+                <td class="menu-item">КОНТАКТЫ</td>
+            </tr>
+        </table>
+
+        <div class="center_top">
+            <div class="top">
+                <img src="/ym/img/psihologiy_deneg.png" alt="">
+            </div>
+        </div>
+
+        <div class="vertical" id="mainVertical">
+            <div class="item_left">
+                <img class="img" src="/ym/img/ym_1.png" alt="">
+            </div>
+            <div class="item_c">
+                <img class="img" src="/ym/img/ym_2.png" alt="">
+            </div>
+            <div class="item">
+                <img class="img" src="/ym/img/ym_3.png" alt="">
+            </div>
+        </div>
+
+        <div id="center">
+            <div class="img_1">
+                <div class="img_1_1 active">
+                    <p class="text_ofer">
+                        Авторcкая методика
+                    </p>
+                </div>
+                <div class="img_0_0">
+                    <img class="img" src="/ym/img/namber_1_1.png" alt="">
+                </div>
+                <div class="img_1_2">
+                    <img class="img" src="/ym/img/namber_2_2.png" alt="">
+                </div>
+                <div class="img_1_3">
+                    <img class="img" src="/ym/img/namber_3_3.png" alt="">
+                </div>
+                <div class="img_1_4">
+                    <img class="img" src="/ym/img/namber_4_4.png" alt="">
+                </div>
+                <div class="img_1_5">
+                    <img class="img" src="/ym/img/namber_5_5.png" alt="">
+                </div>
+                <div class="img_1_6">
+                    <div>
+                        <img class="img" src="/ym/img/namber_6_6.png" alt="">
+                    </div>
+                </div>
+                <div class="img_1_6">
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="img_3 img_3_position">
+                <div class="img_3_1 active">
+                    <div class="boc_txt_2">
+                        <p>Яна Ардышева</p>
+                    </div>
+                </div>
+                <div class="img_3_1">
+                    <img class="img_ramcka" src="/ym/img/ym_pam_1.png" alt="">
+                    <div class="boc_txt">
+                        Работа с внутренними
+                        установками помогает избавиться
+                        от страхов и ограничений,
+                        мешающих зарабатывать больше,
+                        и открывает путь к осознанным
+                        решениям
+                    </div>
+                    <button class="animated-button batton_position openFormBtn">Отправить зявку</button>
+                </div>
+                <div class="img_3_2">
+                    <img class="img_ramcka" src="/ym/img/ym_pam_2.png" alt="">
+                    <div class="boc_txt">
+                        <ol>
+                            <li>Четкий план для выхода
+                                на новый финансовый уровень
+                            </li>
+                            <li>Персональные рекомендации
+                                — как использовать
+                                ваши врожденные таланты
+                                для заработка
+                            </li>
+                            <li>Расшифровка
+                                вашего "денежного кода"
+                                по дате рождения
+                                — какие числа управляют
+                                вашим достатком
+                            </li>
+                        </ol>
+                    </div>
+                    <button class="animated-button batton_position openFormBtn">Отправить зявку</button>
+                </div>
+                <div class="img_3_3">
+                    <img class="img_ramcka" src="/ym/img/ym_pam_3.png" alt="">
+                    <div class="boc_txt">
+                        Через Telegram (звонок) 90 минут
+
+                        — глубокий разбор вашего запроса
+                        
+                        Все материалы останутся у вас
+                    </div>
+                    <button class="animated-button batton_position openFormBtn">Отправить зявку</button>
+                </div>
+                <div class="img_3_4">
+
+                  <div class="video-thumbs-container" id="videoThumbsContainer"></div>
+                    <!-- новый контент-->
+                    
+                    <!-- новый контент-->
+                    <div class="boc_txt">
+                        <img class="img_ramcka" src="/ym/img/ym_pam_4.png" alt="">
+                        
+                    </div>
+                </div>
+                <div class="img_3_5">
+                    <img class="img_ramcka" src="/ym/img/ym_pam_5.png" alt="">
+                    <div class="boc_txt">
+                        Детальный анализ на 13 страницах А4,
+                        включающий:
+                        Ваши сильные и слабые стороны
+                        в финансах
+                        Кармические уроки
+                        и способы их проработки
+                        Идеальные ниши
+                        и форматы заработка именно для вас
+                    </div>
+                    <button class="animated-button batton_position openFormBtn">Отправить зявку</button>
+                </div>
+                <div class="img_3_6">
+                    <div id="boc_txt"></div>
+                </div>
+                <div class="img_3_7">
+                    <div id="boc_txt"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vertical_alt" id="verticalAlt">
+            <img class="img_ramcka_2" src="/ym/img/ym_pam_6.png" alt="">
+            <div class="text_ofer_form">
+                Меня зовут Ардышева Яна — я кризисный психолог с многолетним стажем и большим опытом работы
+                в сфере психологии эмоциональных, жизненных и финансовых кризисов.
+                За годы практики я собрала внушительное портфолио успешных кейсов,
+                которые подтверждают эффективность моего подхода.
+                Один из самых значимых проектов, созданный мной
+                — это авторская программа «Психология денег», которая помогает людям
+                за короткий срок изменить своё отношение к финансам, разобраться с внутренними блоками
+                и начать строить здоровую и гармоничную финансовую реальность.
+                Я верю, что каждый кризис — это возможность для роста и преображения.
+                Моя задача — помочь вам пройти этот путь
+                с минимальными потерями и максимальным личным развитием
+            </div>
+        </div>
+
+        <div class="conteyner_form" id="contentBox">
+
+           <button class="close-button" id="closeBtn">&times;</button>
+           
+           
+            
+           <div class="text_ofer_2"> Вам нужна помошь?</div>   
+            <div class="text_ofer_3"> оставте заявку</div>       
+                  
+            
+                  
+          
+        
+        <form action="обработчик.php" method="POST">
+            <label for="tel">Телефон:</label><br>
+            <input type="tel" id="tel" name="tel" required placeholder="+7 999 999 99 99"><br><br>
+
+            <label for="tg_whatsapp">Telegram или WhatsApp:</label><br>
+            <input type="text" id="tg_whatsapp" name="tg_whatsapp" required placeholder="@vach_profil"><br><br>
+
+            <label for="name">Имя Отчество:</label><br>
+            <input type="text" id="name" name="name" required placeholder="Иван Петрович"><br><br>
+
+            <label for="message_zapros">Сообщение:</label><br>
+            <textarea id="message_zapros" name="message_zapros" rows="5" required></textarea><br><br>
+
+            <input type="submit" value="Отправить">
+        </form>
+
+        </div>
+    </div>
+
+    <script>
+    // === Элементы DOM ===
+    const blocks1 = document.querySelectorAll('.img_1 > div');
+    const blocks3 = document.querySelectorAll('.img_3 > div');
+    const menuItems = document.querySelectorAll('.menu-item');
+    const mainVertical = document.getElementById('mainVertical');
+    const verticalAlt = document.getElementById('verticalAlt');
+    const closeBtn = document.getElementById('closeBtn');
+    const contentBox = document.getElementById('contentBox');
+    let currentIndex = 0;
+    let hideMainTimer = null;
+
+    // === Показ активного блока ===
+    function showContent(index) {
+        if (index < 0 || index >= blocks1.length) return;
+        blocks1.forEach(b => b.classList.remove('active'));
+        blocks3.forEach(b => b.classList.remove('active'));
+        menuItems.forEach(item => item.classList.remove('active'));
+        if (blocks1[index]) blocks1[index].classList.add('active');
+        if (blocks3[index]) blocks3[index].classList.add('active');
+        if (menuItems[index]) menuItems[index].classList.add('active');
+
+        if (hideMainTimer) clearTimeout(hideMainTimer);
+
+        if (index === 6) {
+            mainVertical.style.opacity = '0';
+            hideMainTimer = setTimeout(() => {
+                mainVertical.style.visibility = 'hidden';
+                mainVertical.style.display = 'none';
+                verticalAlt.classList.add('show');
+            }, 750);
+        } else {
+            verticalAlt.classList.remove('show');
+            mainVertical.style.display = 'flex';
+            mainVertical.style.visibility = 'visible';
+            mainVertical.style.opacity = '1';
+        }
+        currentIndex = index;
+    }
+
+    // === Навигация ===
+    menuItems.forEach((item, index) => {
+        item.addEventListener('click', () => showContent(index));
+    });
+
+    window.addEventListener('wheel', e => {
+        e.deltaY > 0 ? showContent(currentIndex + 1) : showContent(currentIndex - 1);
+    }, { passive: false });
+
+    let touchStartY = 0;
+    window.addEventListener('touchstart', e => {
+        touchStartY = e.touches[0].clientY;
+    });
+    window.addEventListener('touchend', e => {
+        const touchEndY = e.changedTouches[0].clientY;
+        const delta = touchStartY - touchEndY;
+        if (delta > 50) showContent(currentIndex + 1);
+        else if (delta < -50) showContent(currentIndex - 1);
+    });
+
+    // === Кнопки "Отправить заявку" ===
+    document.querySelectorAll('.openFormBtn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            contentBox.innerHTML = '';
+            contentBox.appendChild(closeBtn);
+            contentBox.insertAdjacentHTML('beforeend', `
+                <div class="text_ofer_2"> Вам нужна помощь?</div>   
+                <div class="text_ofer_3"> оставьте заявку</div>       
+                <form action="обработчик.php" method="POST">
+                    <label for="tel">Телефон:</label><br>
+                    <input type="tel" id="tel" name="tel" required placeholder="+7 999 999 99 99"><br><br>
+                    <label for="tg_whatsapp">Telegram или WhatsApp:</label><br>
+                    <input type="text" id="tg_whatsapp" name="tg_whatsapp" required placeholder="@vach_profil"><br><br>
+                    <label for="name">Имя Отчество:</label><br>
+                    <input type="text" id="name" name="name" required placeholder="Иван Петрович"><br><br>
+                    <label for="message_zapros">Сообщение:</label><br>
+                    <textarea id="message_zapros" name="message_zapros" rows="5" required></textarea><br><br>
+                    <input type="submit" value="Отправить">
+                </form>
+            `);
+            contentBox.classList.add('show');
+        });
+    });
+
+    // === Галерея видео с фото-превью ===
+    const videoList = [
+        {
+            src: '/ym/video/video5463315803443066918.mp4',
+            poster: '/ym/img/video2.png', // ← путь к фото-заставке
+            title: 'Видео одзыв 1: Психология денег',
+            caption: 'Как преодолеть страх перед деньгами'
+        },
+        {
+            src: '/ym/video/video5472188072005238392.mp4',
+            poster: '/ym/img/video1.png', // ← путь к фото-заставке
+            title: 'Видео одзыв 2: Психология денег',
+            caption: 'Почему мы боимся успеха?'
+        }
+    ];
+
+    const thumbsContainer = document.getElementById('videoThumbsContainer');
+
+    videoList.forEach(video => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'video-thumb-wrapper';
+
+        // Создаём элемент изображения
+        const thumb = document.createElement('img');
+        thumb.className = 'video-thumb';
+        thumb.src = video.poster; // подставляем фото
+        thumb.style.width = '100%';
+        thumb.style.height = '22vh';
+        thumb.style.borderRadius = '12px';
+        thumb.style.cursor = 'pointer';
+        thumb.style.objectFit = 'cover'; // чтобы не растягивалось
+
+        const title = document.createElement('div');
+        title.className = 'video-thumb-title';
+        title.textContent = video.title;
+
+        wrapper.appendChild(thumb);
+        wrapper.appendChild(title);
+        thumbsContainer.appendChild(wrapper);
+
+        // При клике — открываем видео
+        wrapper.addEventListener('click', () => {
+            contentBox.innerHTML = '';
+            contentBox.appendChild(closeBtn);
+
+            const titleEl = document.createElement('div');
+            titleEl.className = 'text_ofer_2';
+            titleEl.textContent = video.title;
+            contentBox.appendChild(titleEl);
+
+            const videoPlayer = document.createElement('video');
+            videoPlayer.src = video.src;
+            videoPlayer.poster = video.poster; // заставка до запуска
+            videoPlayer.controls = true;
+            videoPlayer.style.width = '70%';
+            videoPlayer.style.height = '70%';
+            videoPlayer.style.marginTop = '20px';
+            videoPlayer.style.borderRadius = '12px';
+
+            contentBox.appendChild(videoPlayer);
+
+            const cap = document.createElement('div');
+            cap.className = 'video-caption-popup';
+            cap.textContent = video.caption;
+            contentBox.appendChild(cap);
+
+            contentBox.classList.add('show');
+
+            // Перезагружаем и запускаем
+            setTimeout(() => {
+                videoPlayer.load();
+                videoPlayer.play().catch(e => {
+                    console.warn("Автовоспроизведение заблокировано", e);
+                    alert("Нажмите кнопку воспроизведения на видео");
+                });
+            }, 100);
+        });
+    });
+
+    // === Закрытие модального окна ===
+    closeBtn.addEventListener('click', () => {
+        contentBox.classList.remove('show');
+        setTimeout(() => {
+            if (!contentBox.querySelector('#tel')) {
+                contentBox.innerHTML = '';
+                contentBox.appendChild(closeBtn);
+                contentBox.insertAdjacentHTML('beforeend', `
+                    <div class="text_ofer_2"> Вам нужна помощь?</div>   
+                    <div class="text_ofer_3"> оставьте заявку</div>       
+                    <form action="обработчик.php" method="POST">
+                        <label for="tel">Телефон:</label><br>
+                        <input type="tel" id="tel" name="tel" required placeholder="+7 999 999 99 99"><br><br>
+                        <label for="tg_whatsapp">Telegram или WhatsApp:</label><br>
+                        <input type="text" id="tg_whatsapp" name="tg_whatsapp" required placeholder="@vach_profil"><br><br>
+                        <label for="name">Имя Отчество:</label><br>
+                        <input type="text" id="name" name="name" required placeholder="Иван Петрович"><br><br>
+                        <label for="message_zapros">Сообщение:</label><br>
+                        <textarea id="message_zapros" name="message_zapros" rows="5" required></textarea><br><br>
+                        <input type="submit" value="Отправить">
+                    </form>
+                `);
+            }
+        }, 400);
+    });
+</script>
+</body>
+</html>
