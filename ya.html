@@ -458,16 +458,15 @@
         .video-thumbs-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
             flex-wrap: wrap;
             margin-top: 20px;
-            position: relative;
-                    
-                  
+            position: relative;      
             grid-area: 1 / 1;
             z-index: 10;
         }
         .video-thumb-wrapper {
+            
             text-align: center;
             cursor: pointer;
             flex-basis: 280px;
@@ -488,9 +487,11 @@
             transform: scale(1.05);
         }
         .video-thumb-title {
+            position: relative;
+            display: flex;
             color: white;
             font-family: Source_S_4_V;
-            font-size: 2.3vh;
+            font-size: 1.8vh;
             margin: 8px 0;
         }
         .video-caption-popup {
