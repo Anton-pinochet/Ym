@@ -451,15 +451,15 @@
 
         @media (min-width: 768px) and (max-width: 1200px){
             .img{
-                width: 60%;
+                width: 50%;
                 height: auto;
             }
             .top_vertical{
                 top: -3vw;
             }
             .img_namber{
-                width: 50%;
-                top: 50%;
+                width: 45%;
+              /*  top: 40%;*/
             }
             .img_1 > div.active {
                 opacity: 1;
@@ -469,13 +469,13 @@
                 overflow: visible;
                 position: relative;
                 position: absolute;
-                top: 55%;
+                top: 52%;
                 left: 25%;
                 transform: translate(-70%, -50%);
                 text-align: center;
             }
             .img_0{
-                width: 45%;
+                width: 50%;
                 height: auto;
             }
 
@@ -510,7 +510,7 @@
             position: absolute;
             top: 50%;
             left: 72%;
-            transform: translate(-15%, -38%);
+            transform: translate(-15%, -40%);
         }
         .boc_txt {
             flex-direction: column;
@@ -527,20 +527,37 @@
         }
 
         .img_ramcka_2 {
-            display: block;
+            display: none;
             grid-area: 1 / 1;
             width: 70%;
             height: 60% ;
+             margin: 20px;
         }
         .text_ofer_form {
             position: relative;
-            padding: 20%;
+            /*padding: 20px;*/
             font-family: Source_S_4_V;
-            font-size: 2.1vh;
+            font-size: 2vh;
             color: #ffffff;
             grid-area: 1 / 1;
             
         }
+          .vertical_alt.show {
+            opacity: 1;
+            visibility: visible;
+            display: inline-grid;
+            height: auto;
+            width: 80%;
+            position: relative;
+            align-items: center;
+            justify-items: center;
+            justify-content: center;
+            left: 50%;
+            top: 50%;
+            transform: translate(-30%, -80%);
+            z-index: 10;
+        }
+
     }
     </style>
 </head>
