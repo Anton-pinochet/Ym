@@ -543,7 +543,7 @@
             position: relative;
           /*  padding: 18%;*/
             font-family: Source_S_4_V;
-            font-size: 1.8vh;
+            font-size: 2.1vh;
             color: #ffffff;
             grid-area: 1 / 1;
             
@@ -560,8 +560,48 @@
             justify-content: center;
             left: 50%;
             top: 35%;
-            transform: translate(-40%, -26%);
+            transform: translate(-37%, -26%);
             z-index: 10;
+        }
+
+        .conteyner_form{
+            opacity: 0;
+            background-color: #807d7d;
+            border: 1px solid #ffffff;
+            position: absolute;
+            width: 95vw;
+            height: 90vh;
+             pointer-events: none;
+             transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 100;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+         input[type='text'],
+        input[type='email'],
+        input[type=tel]{
+            font-family: Source_S_4_V;
+            font-size: 20px;
+            color: #ffffff;
+            height: 20px;
+            width: 400px;
+            background-color: #807d7d;
+            border: 1px solid #ffffff;
+            padding: 2px;
+        }
+          textarea{
+            width: 400px;
+            height: 200px;
+            background-color: #807d7d;
+            border: 1px solid #ffffff;
+            font-family: Source_S_4_V;
+            font-size: 26px;
+            color: #ffffff;
         }
     }
     </style>
