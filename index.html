@@ -565,7 +565,8 @@
             z-index: 10;
         }
 
-        .conteyner_form{
+        .conteyner_form {
+            display: block;
             opacity: 0;
             background-color: #807d7d;
             border: 1px solid #ffffff;
@@ -578,6 +579,7 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
+           
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -623,6 +625,13 @@
         html, body {
             height: 100vh;
             overflow: hidden;
+        }
+         .conteyner_form.show {
+            opacity: 1;
+            pointer-events: auto;
+            display: block;
+            padding-left: 70%;
+           z-index: 500;
         }
         
     }
@@ -778,19 +787,20 @@
         </div>
         <div class="conteyner_form" id="contentBox">
            <button class="close-button" id="closeBtn">&times;</button>
-           <div class="text_ofer_2"> Вам нужна помошь?</div>   
-            <div class="text_ofer_3"> оставте заявку</div>       
-        <form action="обработчик.php" method="POST">
-            <label for="tel">Телефон:</label><br>
-            <input type="tel" id="tel" name="tel" required placeholder="+7 999 999 99 99"><br><br>
-            <label for="tg_whatsapp">Telegram или WhatsApp:</label><br>
-            <input type="text" id="tg_whatsapp" name="tg_whatsapp" required placeholder="@vach_profil"><br><br>
-            <label for="name">Имя Отчество:</label><br>
-            <input type="text" id="name" name="name" required placeholder="Иван Петрович"><br><br>
-            <label for="message_zapros">Сообщение:</label><br>
-            <textarea id="message_zapros" name="message_zapros" rows="5" required></textarea><br><br>
-            <input type="submit" value="Отправить">
-        </form>
+           
+            <span class="text_ofer_2"> Вам нужна помошь?</span>   
+            <span class="text_ofer_3"> оставте заявку</span>       
+            <form action="обработчик.php" method="POST">
+                <label for="tel">Телефон:</label><br>
+                <input type="tel" id="tel" name="tel" required placeholder="+7 999 999 99 99"><br><br>
+                <label for="tg_whatsapp">Telegram или WhatsApp:</label><br>
+                <input type="text" id="tg_whatsapp" name="tg_whatsapp" required placeholder="@vach_profil"><br><br>
+                <label for="name">Имя Отчество:</label><br>
+                <input type="text" id="name" name="name" required placeholder="Иван Петрович"><br><br>
+                <label for="message_zapros">Сообщение:</label><br>
+                <textarea id="message_zapros" name="message_zapros" rows="5" required></textarea><br><br>
+                <input type="submit" value="Отправить">
+            </form>
         </div>
     </div>
     <script>
